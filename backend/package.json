@@ -10,7 +10,7 @@
   "migrate": "npx prisma migrate dev --name init",
   "seed": "node prisma/seed.js",
   "postinstall": "prisma generate"
-}
+},
   "keywords": [
     "express",
     "prisma",
