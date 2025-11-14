@@ -18,7 +18,7 @@ function Home() {
 
   const fetchProducts = async () => {
     try {
-      const res = await axios.get("http://localhost:5000/products", {
+      const res = await axios.get(`${process.env.REACT_APP_API_URL}/products`, {
         params: { page, category, sort, limit: 4, search },
       });
       setProducts(res.data.products);
@@ -30,14 +30,14 @@ function Home() {
   };
 
   const fetchCartCount = async () => {
-    const res = await axios.get("http://localhost:5000/cart");
+    const res = await axios.get(`${process.env.REACT_APP_API_URL}/cart`);
     const totalItems = res.data.reduce((sum, item) => sum + item.quantity, 0);
     setCartCount(totalItems);
   };
 
   const handleAddToCart = async (productId) => {
     try {
-      await axios.post("http://localhost:5000/cart", { productId });
+      await axios.post(`${process.env.REACT_APP_API_URL}/cart`, { productId });
       toast.success("Product added to cart!");
       fetchCartCount();
     } catch (err) {

@@ -8,7 +8,7 @@ function FilterSort({ setCategory, category }) {
   useEffect(() => {
     const fetchCategories = async () => {
       try {
-        const res = await axios.get("http://localhost:5000/categories");
+        const res = await axios.get(`${process.env.REACT_APP_API_URL}/categories`);
         setCategories(["All", ...res.data]);
       } catch (error) {
         console.error("Failed to load categories:", error);

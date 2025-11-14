@@ -10,7 +10,7 @@ function Cart() {
   const [cartCount, setCartCount] = useState(0);
 
   const fetchCart = async () => {
-    const res = await axios.get("http://localhost:5000/cart");
+    const res = await axios.get(`${process.env.REACT_APP_API_URL}/cart`);
     setCartItems(res.data);
     const totalItems = res.data.reduce((sum, item) => sum + item.quantity, 0);
     setCartCount(totalItems);
@@ -19,12 +19,12 @@ function Cart() {
   const handleQuantity = async (item, type) => {
     const newQty = type === "inc" ? item.quantity + 1 : item.quantity - 1;
     if (newQty < 1) return;
-    await axios.patch(`http://localhost:5000/cart/${item.id}`, { quantity: newQty });
+    await axios.patch(`${process.env.REACT_APP_API_URL}/cart/${item.id}`, { quantity: newQty });
     fetchCart();
   };
 
   const handleRemove = async (itemId) => {
-    await axios.delete(`http://localhost:5000/cart/${itemId}`);
+    await axios.delete(`${process.env.REACT_APP_API_URL}/cart/${itemId}`);
     toast.success("Item removed from cart");
     fetchCart();
   };

@@ -5,13 +5,13 @@ function ProductList() {
   const [products, setProducts] = useState([]);
 
   useEffect(() => {
-    axios.get("http://localhost:5000/products")
+    axios.get(`${process.env.REACT_APP_API_URL}/products`)
       .then(res => setProducts(res.data.products))
       .catch(err => console.error("Error fetching products:", err));
   }, []);
 
   const addToCart = async (productId) => {
-    await axios.post("http://localhost:5000/cart", { productId, quantity: 1 });
+    await axios.post(`${process.env.REACT_APP_API_URL}/cart`, { productId, quantity: 1 });
     alert("✅ Product added to cart!");
   };
 
