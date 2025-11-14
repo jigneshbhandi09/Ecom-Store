@@ -14,7 +14,7 @@ function ProductDetail() {
 
   const fetchCartCount = async () => {
     try {
-      const res = await axios.get("http://localhost:5000/cart");
+      const res = await axios.get(`${process.env.REACT_APP_API_URL}/cart`);
       const totalItems = res.data.reduce((sum, item) => sum + item.quantity, 0);
       setCartCount(totalItems);
     } catch (err) {
@@ -25,7 +25,7 @@ function ProductDetail() {
   useEffect(() => {
     const fetchProduct = async () => {
       try {
-        const res = await axios.get(`http://localhost:5000/products/${id}`);
+        const res = await axios.get(`${process.env.REACT_APP_API_URL}/products/${id}`);
         setProduct(res.data.product);
         setRelated(res.data.related);
         fetchCartCount();
@@ -38,7 +38,7 @@ function ProductDetail() {
 
   const handleAddToCart = async () => {
     try {
-      await axios.post("http://localhost:5000/cart", {
+      await axios.post(`${process.env.REACT_APP_API_URL}/cart`, {
         productId: product.id,
         quantity: 1,
       });
